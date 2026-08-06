@@ -28,10 +28,18 @@ This reads actual chip/flash/MAC info directly off the device via esptool
 and is authoritative over anything written here.
 
 Confirmed via UIFlow2 (uiflow2.m5stack.com, WebSerial): Controller reports
-as `Cardputer-Adv`, SoC `ESP32-S3`, matching the assumptions above. Flash
-size specifically still needs an esptool readout (see caveat above) — not
-yet captured because only one process can hold the serial port at a time,
-and UIFlow2 was connected during setup.
+as `Cardputer-Adv`, SoC `ESP32-S3`, matching the assumptions above.
+
+Confirmed via esptool during first flash (2026-08-06):
+
+    Chip is ESP32-S3 (QFN56) (revision v0.2)
+    Features: WiFi, BLE, Embedded Flash 8MB (GD)
+    Crystal is 40MHz
+    USB mode: USB-Serial/JTAG
+    MAC: 80:45:6b:76:fa:68
+
+8MB flash confirmed. No PSRAM listed under Features, matching the `FN8`
+(no-PSRAM) assumption — treat as confirmed now.
 
 ## USB connection gotcha (learned 2026-08-06)
 
