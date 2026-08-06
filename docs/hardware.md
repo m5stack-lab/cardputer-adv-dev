@@ -27,6 +27,27 @@ Don't trust any of the above blindly for flash-size-sensitive config
 This reads actual chip/flash/MAC info directly off the device via esptool
 and is authoritative over anything written here.
 
+Confirmed via UIFlow2 (uiflow2.m5stack.com, WebSerial): Controller reports
+as `Cardputer-Adv`, SoC `ESP32-S3`, matching the assumptions above. Flash
+size specifically still needs an esptool readout (see caveat above) — not
+yet captured because only one process can hold the serial port at a time,
+and UIFlow2 was connected during setup.
+
+## USB connection gotcha (learned 2026-08-06)
+
+The bundled/included USB-C cable was **charge-only** (no data lines) — the
+device drew power and its screen worked fine, but macOS never enumerated
+any new serial device (`ls /dev/cu.*`, `system_profiler`, and Chrome's
+native WebSerial picker all showed nothing). Confirmed by testing with a
+known-data-capable cable, after which the device immediately appeared as
+`/dev/cu.usbmodemXXXX`. If the device seems "invisible" over USB, try a
+different cable before suspecting drivers/firmware/OS config.
+
+Also: only one process can own the serial port at a time. If `esptool`
+reports `Resource busy`, check for another connection first
+(`lsof /dev/cu.usbmodemXXXX`) — commonly a browser tab with UIFlow2 or a
+`pio device monitor` session left open.
+
 ## PlatformIO board choice
 
 PlatformIO's `espressif32` platform has no dedicated `cardputer` board
