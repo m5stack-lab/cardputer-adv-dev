@@ -1,0 +1,9 @@
+tools/venv/
+firmware/*/.pio/
+firmware/*/.pioenvs/
+firmware/*/.piolibdeps/
+*.pyc
+__pycache__/
+.DS_Store
+backups/*.bin
+!backups/.gitkeep
