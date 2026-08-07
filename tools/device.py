@@ -100,11 +100,19 @@ def cmd_backup(args):
     if not size_str:
         sys.exit("Could not detect flash size from esptool output.")
 
-    print(f"Backing up {size_str} of flash from {port} to {out}")
+    units = {"MB": 1024 * 1024, "KB": 1024, "B": 1}
+    for suffix, mult in units.items():
+        if size_str.upper().endswith(suffix):
+            size_bytes = int(float(size_str[: -len(suffix)].strip()) * mult)
+            break
+    else:
+        sys.exit(f"Could not parse flash size {size_str!r} into bytes.")
+
+    print(f"Backing up {size_str} ({size_bytes} bytes) of flash from {port} to {out}")
     subprocess.run(
         [
             ESPTOOL, "-p", port, "-b", "460800",
-            "read_flash", "0", size_str, out,
+            "read_flash", "0", str(size_bytes), out,
         ],
         check=True,
     )
