@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/banner.svg" alt="cardputer-adv-dev: Cardputer ADV dev workspace: tooling, hello-world, notes" width="100%"></p>
+
 # cardputeradv
 
 Development project for the M5Stack Cardputer ADV (ESP32-S3).
@@ -30,3 +32,8 @@ Development project for the M5Stack Cardputer ADV (ESP32-S3).
    ```
 
 See `docs/hardware.md` for hardware specs and sourcing notes.
+
+<!-- org-footer -->
+---
+
+<p align="center"><sub>Part of <a href="https://github.com/m5stack-lab">m5stack-lab</a> · unofficial M5Stack projects, not affiliated with M5Stack · built by <a href="https://github.com/ry-ops">ry-ops</a></sub></p>
